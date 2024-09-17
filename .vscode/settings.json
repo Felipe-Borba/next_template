@@ -28,5 +28,9 @@
     "activityBar.background": "#4C1C39",
     "titleBar.activeBackground": "#6A2750",
     "titleBar.activeForeground": "#FDF8FB"
-  }
+  },
+  "cSpell.words": [
+    "pageable",
+    "Pageable"
+  ]
 }
