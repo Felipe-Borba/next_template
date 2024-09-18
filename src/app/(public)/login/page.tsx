@@ -1,9 +1,10 @@
 "use client";
 
 import signIn from "@/actions/signIn";
+import { FieldInputText } from "@/components/form/FieldInputText";
+import FormContainer from "@/components/form/FormContainer";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { FormField } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconLoader2 } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
@@ -39,41 +40,32 @@ export default function Page() {
     <div>
       <h1>login</h1>
       <br />
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit((data) => login.mutate(data))}>
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="email@example.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <FormContainer
+        form={form}
+        onSubmit={login.mutate}
+        onError={(err) => {
+          console.log(err);
+        }}
+      >
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => <FieldInputText field={field} label="Email" placeholder="email@example.com" />}
+        />
 
-          <Button className="w-full" type="submit" disabled={login.isPending}>
-            {login.isPending && <IconLoader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Sign In
-          </Button>
-        </form>
-      </Form>
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => <FieldInputText field={field} label="Password" type="password" />}
+        />
+
+        <Button className="w-full" type="submit" disabled={login.isPending}>
+          {login.isPending && <IconLoader2 className="mr-2 h-4 w-4 animate-spin" />}
+          Sign In
+        </Button>
+      </FormContainer>
     </div>
   );
 }
+
+//TODO add FormInputDate, FormInputNumber, FormInputFile
