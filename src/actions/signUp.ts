@@ -5,13 +5,13 @@ interface UserSignUpParams {
   name: string;
   password: string;
 }
-interface UserSignUpResponse {
+export interface UserSignUpResponse {
   id: number;
   name: string;
   role: "admin" | "user";
   token: string;
 }
 export default async function signUp(params: UserSignUpParams): Promise<UserSignUpResponse> {
-  const response = await api.post("/user/sign-up", params);
+  const response = await api.post("/auth/sign-up", params);
   return response.data;
 }
