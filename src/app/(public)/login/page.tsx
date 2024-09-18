@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IconLoader2 } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -68,7 +69,7 @@ export default function Page() {
           />
 
           <Button className="w-full" type="submit" disabled={login.isPending}>
-            {/* {login.isPending && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} */}
+            {login.isPending && <IconLoader2 className="mr-2 h-4 w-4 animate-spin" />}
             Sign In
           </Button>
         </form>
